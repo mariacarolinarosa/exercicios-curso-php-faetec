@@ -1,4 +1,7 @@
 <?php
+
+//Paginação 
+
 $produtos = [
     ["id" => 1, "nome" => "God of War", "preco" => 300],
     ["id" => 2, "nome" => "Death Stranding Director's cut", "preco" => 120],
@@ -17,33 +20,44 @@ $produtos = [
 $qtd_produtos = count($produtos);
 
 $pagina = $_GET['pagina'] ?? null;
-echo "funcionou ". $qtd_produtos;
 
-if ($pagina !== null) {
-    if ($pagina == 1) {
-        foreach ($produtos as $p) {
-            echo "<h3>Produto ". $p["id"] ."</h3>";
+$lista_parcial = [];
+
+if($pagina !== null){
+    if($pagina == 1){
+        $lista_parcial =  array_slice($produtos, 0, 4);
+        echo "<h3>Página 1 " ."</h3>";
+        foreach ($lista_parcial as $p) {
+            echo "<p>ID: " . htmlspecialchars($p["id"]) . "</p>";
             echo "<p>Nome: " . htmlspecialchars($p["nome"]) . "</p>";
             echo "<p>Preço: R$ " . number_format($p["preco"], 2, ',', '.') . "</p>";
             echo "<hr>";
         }
-    } else if ($pagina =="buscar"){
-        $id_url = $_GET['id'] ?? null;
-        if($id_url !== null){
-            foreach($produtos as $p){
-                if($p["id"] == $id_url){
-                    echo "<h3>Produto encontrado: </h3>";
-                    echo "<p>Nome: " . htmlspecialchars($p["nome"]) . "</p>";
-                    echo "<p>Preço: R$ " . number_format($p["preco"], 2, ',', '.') . "</p>";
-                }
-            }
-        } else{
-            echo "Você precisa digitar o id do produto. ";
+    } else if($pagina == 2){
+        $lista_parcial =  array_slice($produtos, 4, 4);
+        echo "<h3>Página 2 " ."</h3>";
+        foreach ($lista_parcial as $p) {
+            echo "<p>ID: " . htmlspecialchars($p["id"]) . "</p>";
+            echo "<p>Nome: " . htmlspecialchars($p["nome"]) . "</p>";
+            echo "<p>Preço: R$ " . number_format($p["preco"], 2, ',', '.') . "</p>";
+            echo "<hr>";
         }
+    } else if ($pagina == 3){
+        $lista_parcial =  array_slice($produtos, 8, 4);
+        echo "<h3>Página 3 " ."</h3>";
+        foreach ($lista_parcial as $p) {
+            echo "<p>ID: " . htmlspecialchars($p["id"]) . "</p>";
+            echo "<p>Nome: " . htmlspecialchars($p["nome"]) . "</p>";
+            echo "<p>Preço: R$ " . number_format($p["preco"], 2, ',', '.') . "</p>";
+            echo "<hr>";
+        }
+    } else{
+        echo "O sistema possui 3 páginas apenas. ";
     }
 } else{
-    echo "<h4>Para listagem de produtos, cole na url: <code>?pagina=listar</code></h4>";
-    echo "<h4>Para buscar por ID, cole na url: <code>?pagina=buscar&id=1</code></h4>";
+    echo "Insira na url<code>?pagina=2 ou ?pagina=1</code>";
 }
+
+
 
 ?>
