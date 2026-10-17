@@ -35,6 +35,6 @@ if ($acao !== null) {
         }
     }
 } else{
-    echo "<h4>Para listagem de produtos, cole na url: <code>?acao=listar</code></h4>";
-    echo "<h4>Para buscar por ID, cole na url: <code>?acao=buscar&id=1</code></h4>";
+    echo "<h4>Para ordenar os produtos por preço, cole na url: <code>?ordem=preco</code></h4>";
+    echo "<h4>Para ordenar os produtos por nome, cole na url: <code>?ordem=nome</code></h4>";
 }
